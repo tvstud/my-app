@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
 
+import { useState } from 'react';
+import './App.css';
+import { ControlledForm } from './ControlledForm';
+import {errorBoundary} from "./errorBoundary"
+import { printPtops } from './printProps';
+
+const StepOne=({gotoNext})=>(
+<>
+<h1>Step 1</h1>
+<button onClick={()=>gotoNext({name: 'Harrison Tuja'})}>Next</button>
+</>
+);
+const StepTwo=({gotoNext})=>(
+  <>
+  <h1>Step 2</h1>
+  <button onClick={()=>gotoNext({Age: '29'})}>Next</button>
+  </>
+  );
+const StepThree=({gotoNext})=>(
+  <>
+  <h1>Step 3</h1>
+  <button onClick={()=>gotoNext({haircolor: 'black'})}>Next</button>
+  </>
+  );
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <errorBoundary>
+      <UncontrolledOnboardingFlow onFinish={data=>{ console.log(data);
+        alert("Onboard Complete");}}>
+       
+<StepOne />
+<StepTwo />
+<StepThree />
+
+      </UncontrolledOnboardingFlow>
+    
+    </errorBoundary>
+    
   );
 }
 
